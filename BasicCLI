@@ -1,7 +1,10 @@
 ## Common Azure CLI Commands ##
 
-# Login from a VM
-az login
+
+# login with with a Manged Identity (system) 
+az login --identity
+
+#login with App ID
 az login --service-principal --username APP_ID --password CLIENT_SECRET --tenant TENANT_ID
 
 # List all users in the Azure AD tenant
