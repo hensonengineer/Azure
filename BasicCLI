@@ -1,0 +1,42 @@
+## Common Azure CLI Commands ##
+
+# Login from a VM
+az login
+az login --service-principal --username APP_ID --password CLIENT_SECRET --tenant TENANT_ID
+
+# List all users in the Azure AD tenant
+az ad user list --output table
+
+# Show details of a specific user by username or ID
+az ad user show --id <user_object_id>
+
+# Search for users by display name
+az ad user list --filter "displayName eq '<display_name>'" --output table
+
+# show groups
+az group list
+az group show --name <resource_group_name>
+
+#show vms
+az vm list
+# Show details of a specific virtual machine
+az vm show --name <vm_name> --resource-group <resource_group_name>
+
+#Blob Storage
+az storage account list
+# List all containers in a storage account
+az storage container list --account-name <storage_account_name> --output table
+
+# Show details of a specific container
+az storage container show --name <container_name> --account-name <storage_account_name>
+
+# List all blobs in a container
+az storage blob list --container-name <container_name> --account-name <storage_account_name> --output table
+
+# Show details of a specific blob
+az storage blob show --container-name <container_name> --name <blob_name> --account-name <storage_account_name>
+
+
+
+az webapp list
+az webapp show --name <web_app_name> --resource-group <resource_group_name>
