@@ -1,0 +1,23 @@
+### Create a VM ##
+
+#options to get images you want to use
+az vm image list --output table
+az vm image list --publisher Canonical --output table
+az vm image list --location eastus --output table
+
+#get vm sizes
+az vm list-sizes --location eastus --output table
+
+#get resource group
+az group list --output table
+
+#get VNETs
+az network vnet list --output table
+
+#get subnets
+az network vnet subnet list --vnet-name <YourVnetName> --resource-group <YourResourceGroupName> --output table
+
+#create the VM
+az vm create --resource-group ProjectGenesisResourceGroup --name <name> --image <image> --size <size> --vnet-name <vnetname> --subnet default --generate-ssh-keys --location eastus
+
+
