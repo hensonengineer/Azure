@@ -18,6 +18,6 @@ az network vnet list --output table
 az network vnet subnet list --vnet-name <YourVnetName> --resource-group <YourResourceGroupName> --output table
 
 #create the VM
-az vm create --resource-group ProjectGenesisResourceGroup --name <name> --image <image> --size <size> --vnet-name <vnetname> --subnet default --generate-ssh-keys --location eastus
+az vm create --resource-group <resourcegroupname> --name <name> --image <image> --size <size> --vnet-name <vnetname> --subnet default --generate-ssh-keys --location eastus
 
 
