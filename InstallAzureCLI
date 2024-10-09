@@ -1,0 +1,11 @@
+### installing Azure CLI ###
+
+#install homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# install the azure cli 
+brew install azure-cli
+
+# login
+az login
+
