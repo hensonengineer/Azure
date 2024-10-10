@@ -20,4 +20,16 @@ az network vnet subnet list --vnet-name <YourVnetName> --resource-group <YourRes
 #create the VM
 az vm create --resource-group <resourcegroupname> --name <name> --image <image> --size <size> --vnet-name <vnetname> --subnet default --generate-ssh-keys --location eastus
 
+#optional
+--tags CreatedBy=Chenson #add a tag
+--public-ip-address "" #tell Azure no public IP
+
+## Location of the SSH Keys ~/.ssh/
+# The key pair consists of two files:
+# Private key: id_rsa (stored securely and used for authenticating to the VM)
+# Public key: id_rsa.pub (used by Azure to authenticate SSH connections)
+
+### Destroy the VM
+az vm delete --name <VM-Name> --resource-group <Resource-Group-Name> --yes
+
 
