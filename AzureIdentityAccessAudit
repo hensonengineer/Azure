@@ -1,0 +1,29 @@
+##Azure Identity Audits
+
+To list identities in Entra ID (formerly Azure AD) and retrieve their last login information, here are some Azure CLI one-liners:
+
+# List all users and display essential details:
+az ad user list --query '[].{UserPrincipalName:userPrincipalName, DisplayName:displayName, ObjectId:id}' --output table
+
+
+# List all users with their last sign-in date (if available):
+az ad user list --query '[].{UserPrincipalName:userPrincipalName, DisplayName:displayName, LastSignIn:signInActivity.lastSignInDateTime}' --output table
+
+
+
+# Filter users with no sign-in activity:
+az ad user list --query '[?signInActivity==`null`].{UserPrincipalName:userPrincipalName, DisplayName:displayName}' --output table
+
+
+# List service principals (non-user identities):
+az ad sp list --query '[].{AppId:appId, DisplayName:displayName, ObjectId:id}' --output table
+
+# list User role ssignment
+az role assignment list --assignee <user-object-id> --query '[].{Role:roleDefinitionName, Scope:scope}' --output table
+
+# List guest users in Entra ID:
+az ad user list --filter "userType eq 'Guest'" --query '[].{UserPrincipalName:userPrincipalName, DisplayName:displayName}' --output table
+These commands provide quick visibility into users, service principals, and their activity to assist with IAM governance. You’ll need the correct permissions (like Global Reader or User Administrator) to view user sign-in data.
+
+# Put the output into a CSV
+--output csv > users.csv
