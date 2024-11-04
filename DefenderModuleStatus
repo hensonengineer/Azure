@@ -1,0 +1,24 @@
+## Script to understand what Defender for Cloud modules are enabled on a subscription ##
+
+resources=(
+  "VirtualMachines"
+  "SqlServers"
+  "StorageAccounts"
+  "SqlServerVirtualMachines"
+  "KubernetesServices"
+)
+
+for resource in "${resources[@]}"; do
+  pricing_status=$(az security pricing list --query "[?name=='$resource'].{Enabled: enablementTime, IsEnabled: extensions[?isEnabled=='True']}" -o json)
+
+  if [[ -z "$pricing_status" || "$pricing_status" == '[]' ]]; then
+    echo "$resource: not enabled (null)"
+  else
+    isEnabled=$(echo "$pricing_status" | jq '.[].IsEnabled | length')
+    if [[ "$isEnabled" -gt 0 ]]; then
+      echo "$resource: enabled"
+    else
+      echo "$resource: not enabled (null)"
+    fi
+  fi
+done
