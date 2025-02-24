@@ -1,0 +1,13 @@
+## Commands for working with Defender and Sentinel Alerts ##
+
+#Defender and Sentinel alerts only give ID numbers for Accounts
+
+#for Account referenced in the alert
+az ad user show --id "<azure id>" # if user is a human
+az ad sp show --id "<azure id>" #if user is an AppId
+
+#For Subscription referenced in the alert
+az account subscription show --subscription-id "<subscription-id>"
+
+
+
