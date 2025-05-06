@@ -1,0 +1,14 @@
+## node count per Subscription in Azure ##
+
+az graph query -q "
+resourcecontainers
+| where type == 'microsoft.resources/subscriptions'
+| join kind=inner (
+    resources
+    | where type == 'microsoft.containerservice/managedclusters'
+    | mv-expand agentPools = properties.agentPoolProfiles
+    | extend nodeCount = toint(agentPools['count']), clusterName = name
+    | project subscriptionId, clusterName, nodeCount
+) on subscriptionId
+| summarize totalNodes = sum(nodeCount) by subscriptionId, clusterName
+" --output json
